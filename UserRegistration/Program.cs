@@ -15,6 +15,7 @@ namespace UserRegistration
                 Console.WriteLine("Enter 1 for First name");
                 Console.WriteLine("Enter 2 for Last name");
                 Console.WriteLine("Enter 3 for Email");
+                Console.WriteLine("Enter 4 for Mobile Number");
                 Console.WriteLine("Enter 0 to Exit");
 
                 try
@@ -36,6 +37,11 @@ namespace UserRegistration
                             Console.Write("Enter Your Email: ");
                             string email = Console.ReadLine();
                             validation.email(email);
+                            break;
+                        case 4:
+                            Console.Write("Enter Your MOB: ");
+                            string MobileNo = Console.ReadLine();
+                            validation.mobile(MobileNo);
                             break;
                     }
                 }
