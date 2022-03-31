@@ -18,6 +18,7 @@ namespace UserRegistration
                 Console.WriteLine("Enter 4 for Mobile Number");
                 Console.WriteLine("Enter 5 for Password");
                 Console.WriteLine("Enter 6 Password should have at least 1 uppercase ");
+                Console.WriteLine("Enter 7 Password should have at least 1 number ");
                 Console.WriteLine("Enter 0 to Exit");
 
                 try
@@ -54,6 +55,11 @@ namespace UserRegistration
                             Console.Write("Please enter your password: ");
                             string pass_1 = Console.ReadLine();
                             validation.password(pass_1);
+                            break;
+                        case 7:
+                            Console.Write("Please enter your password: ");
+                            string pass_2 = Console.ReadLine();
+                            validation.password(pass_2);
                             break;
                     }
                 }
