@@ -16,6 +16,7 @@ namespace UserRegistration
                 Console.WriteLine("Enter 2 for Last name");
                 Console.WriteLine("Enter 3 for Email");
                 Console.WriteLine("Enter 4 for Mobile Number");
+                Console.WriteLine("Enter 5 for Password");
                 Console.WriteLine("Enter 0 to Exit");
 
                 try
@@ -42,6 +43,11 @@ namespace UserRegistration
                             Console.Write("Enter Your MOB: ");
                             string MobileNo = Console.ReadLine();
                             validation.mobile(MobileNo);
+                            break;
+                        case 5:
+                            Console.Write("Please enter your password: ");
+                            string pass = Console.ReadLine();
+                            validation.password(pass);
                             break;
                     }
                 }
