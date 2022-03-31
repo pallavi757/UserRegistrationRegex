@@ -14,6 +14,7 @@ namespace UserRegistration
             {
                 Console.WriteLine("Enter 1 for First name");
                 Console.WriteLine("Enter 2 for Last name");
+                Console.WriteLine("Enter 3 for Email");
                 Console.WriteLine("Enter 0 to Exit");
 
                 try
@@ -30,6 +31,11 @@ namespace UserRegistration
                             Console.Write("Enter Your Last Name: ");
                             string lastname = Console.ReadLine();
                             validation.lastname(lastname);
+                            break;
+                        case 3:
+                            Console.Write("Enter Your Email: ");
+                            string email = Console.ReadLine();
+                            validation.email(email);
                             break;
                     }
                 }
