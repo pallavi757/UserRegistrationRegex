@@ -13,7 +13,8 @@ namespace UserRegistration
             do
             {
                 Console.WriteLine("Enter 1 for First name");
-                Console.WriteLine("Enter 0 for Exit");
+                Console.WriteLine("Enter 2 for Last name");
+                Console.WriteLine("Enter 0 to Exit");
 
                 try
                 {                 
@@ -24,7 +25,12 @@ namespace UserRegistration
                             Console.Write("Enter Your First Name: ");
                             string firstname = Console.ReadLine();
                             validation.firstname(firstname);
-                            break;                   
+                            break;
+                        case 2:
+                            Console.Write("Enter Your Last Name: ");
+                            string lastname = Console.ReadLine();
+                            validation.lastname(lastname);
+                            break;
                     }
                 }
                 catch (Exception)
