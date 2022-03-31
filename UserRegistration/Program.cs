@@ -20,9 +20,8 @@ namespace UserRegistration
                 Console.WriteLine("Enter 6 Password should have at least 1 uppercase ");
                 Console.WriteLine("Enter 7 Password should have at least 1 number ");
                 Console.WriteLine("Enter 8 Password has exactly 1 special character ");
-                
+                Console.WriteLine("Enter 9 Check sample email");
                 Console.WriteLine("Enter 0 to Exit");
-
                 try
                 {                 
                     choice = int.Parse(Console.ReadLine());
@@ -68,7 +67,11 @@ namespace UserRegistration
                             string pass_3 = Console.ReadLine();
                             validation.password_Special_Char(pass_3);
                             break;
-                       
+                        case 9:
+                            Console.Write("Please enter your email: ");
+                            string s_email = Console.ReadLine();
+                            validation.sample_Email(s_email);
+                            break;
                     }
                 }
                 catch (Exception)

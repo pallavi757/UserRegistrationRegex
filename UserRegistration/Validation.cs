@@ -13,11 +13,7 @@ namespace UserRegistration
         public Regex Password_Uppercase = new Regex  (@"^(?=.*[A-Z]).{8,}$");
         public Regex Password_OneNum = new Regex(@"^(?=.*[A-Z])(?=.*[0-9]).{8,}$");
         public Regex Password_Special_Char =new Regex(@"^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9]{8,}$");
-       
-       
-
-
-
+        public Regex SampleEmail = new Regex(@"^[a-z]{3,}(([.|+]{1})?([-]{1})?[0-9]{1,})?@[a-z0-9]{1,}.[a-z]{3}(.[a-z]{2,4})?$");
         public void firstname(string firstname)
 
         {
@@ -117,8 +113,18 @@ namespace UserRegistration
                 Console.WriteLine("entry is invalid");
             }
         }
-        
+        public void sample_Email(string s_email)
+        {
 
+            if (SampleEmail.IsMatch(s_email))
+            {
+                Console.WriteLine(" entry is valid");
+            }
+            else
+            {
+                Console.WriteLine("entry is invalid");
+            }
+        }
 
     }
 }
