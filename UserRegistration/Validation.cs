@@ -1,129 +1,230 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace UserRegistration
 {
-   public class Validation
+    public class Validation
     {
-        public Regex FirstName = new Regex(@"^[A-Z a-z]{3,}$");
-        public Regex LastName = new Regex(@"^[A-Z a-z]{2,}$");
-        public Regex Email= new Regex(@"^[a-zA-Z0-9+_-]+([.][a-zA-Z0-9+_-]+)*@[a-zA-Z0-9]+([.][a-zA-Z0-9+_-]+)+$");
-        public Regex Mobile =new Regex(@"^[0-9]{2}[\\s][0-9]{10}$");
-        public Regex Password = new Regex(@"^[A-Z a-z 0-9]{8,}$");
-        public Regex Password_Uppercase = new Regex  (@"^(?=.*[A-Z]).{8,}$");
-        public Regex Password_OneNum = new Regex(@"^(?=.*[A-Z])(?=.*[0-9]).{8,}$");
-        public Regex Password_Special_Char =new Regex(@"^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9]{8,}$");
-        public Regex SampleEmail = new Regex(@"^[a-z]{3,}(([.|+]{1})?([-]{1})?[0-9]{1,})?@[a-z0-9]{1,}.[a-z]{3}(.[a-z]{2,4})?$");
-        public void firstname(string firstname)
-
+        string FirstName = (@"^[A-Z][A-Za-z]{2,}$");
+        string LastName = (@"^[A-Z][A-Za-z]{2,}$");
+        string Email =(@"^[A-Za-z]+([.+-][A-Za-z 0-9]+)*@[A-Za-z 0-9]+.[A-Za-z]([.[A-Za-z]{2,})?$");
+        string Mobile =(@"^[0-9]{2}[\s][0-9]{10}$");
+        string Password = (@"^[A-Za-z]{8,}$");
+        string Password_Uppercase =(@"^[A-Za-z]*[A-Z]{1,}[A-Za-z]*$");
+        string Password_OneNum =(@"^[A-Za-z 0-9]{1,}[A-Z]{1,}[A-Za-z 0-9]*$");
+        string Password_Special_Char = (@"^(?=[a-zA-Z0-9#@$?]{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).*$");
+        public string ValidFirstName(string firstName)
         {
-            Console.WriteLine("Your first name is:" + firstname);
-            if (FirstName.IsMatch(firstname))
+            Regex regex = new Regex(FirstName);
+            var result = regex.Match(firstName);
+            try
             {
-                Console.WriteLine(" entry is valid");
+                if (!result.Success)
+                {
+                    if (firstName.Equals(string.Empty))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.NameEmpty,
+                            "First name should not be empty");
+                    else if (firstName.Length < 3)
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.NameLessThanMinChar,
+                            "First name should contain atleast three character");
+                    else if (!char.IsUpper(firstName[0]))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.NameShouldStartWithUpper,
+                            "First name should start with upper case");
+                }
+                else
+                {
+                    return "First Name is Valid";
+                }
             }
-            else
+            catch (UserValidationCustomException exception)
             {
-                Console.WriteLine("entry is invalid");
+                throw exception;
             }
+            return "First Name is Invalid";
         }
-        public void lastname(string lastname)
-
+        public string ValidLastName(string lastName)
         {
-            Console.WriteLine("Your last name is:" + lastname);
-            if (LastName.IsMatch(lastname))
+            Regex regex = new Regex(LastName);
+            var result = regex.Match(lastName);
+            try
+            { 
+                if (!result.Success)
             {
-                Console.WriteLine(" entry is valid");
+                    if (lastName.Equals(string.Empty))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.NameEmpty,
+                            "Last name should not be empty");
+                    else if (lastName.Length < 3)
+                    throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.NameLessThanMinChar,
+                        "Last name should contain atleast three character");
+                else if (!char.IsUpper(lastName[0]))
+                    throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.NameShouldStartWithUpper,
+                        "Last name should start with upper case");
             }
             else
             {
-                Console.WriteLine("entry is invalid");
+                return "Last Name is Valid";
             }
+            }
+            catch (UserValidationCustomException exception)
+            {
+                throw exception;
+            }
+            return "Last Name is Invalid";
         }
-        public void email(string email)
 
+        public string ValidEmailId(string email)
         {
-            Console.WriteLine("Your Email is:" + email);
-            if (Email.IsMatch(email))
+            Regex regex = new Regex(Email);
+            var result = regex.Match(email);
+            try
             {
-                Console.WriteLine(" entry is valid");
+                if (!result.Success)
+                {
+                          if (email.Equals(string.Empty))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.EmailEmpty,
+                            "Email should not be empty");
+                     else if (email.Length< 7)
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.EmailLessThanMinChar,
+                            "Email should contain atleast seven character");
+                    else if (!email.Any(char.IsDigit))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.EmailContainNumber,
+                            "Email should contain atleast one number");
+                    else if (!email.Any(char.IsLetterOrDigit))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.EmailContainsSpecialChar,
+                            "Email should contain special characters");
+                    else if (!email.Contains('@'))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.EmailContainAtSymbol,
+                            "Email should contains @ Symbol");
+                }
+                else return "Email is valid";
             }
-            else
-            {
-                Console.WriteLine("entry is invalid");
+            catch (UserValidationCustomException exception)
+            { 
+            
+               throw exception;
             }
+                    return "Email is Invalid";
         }
-        public void mobile(string MobileNo)
+
+        public string ValidMobileNumber(string MobileNo)
         {
-
-            if (Mobile.IsMatch(MobileNo))
+            Regex regex = new Regex(Mobile);
+            var result = regex.Match(MobileNo);
+            try
             {
-                Console.WriteLine(" entry is valid");
+                if (!result.Success)
+                {
+                    if (MobileNo.Equals(string.Empty))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.MobileNumberEmpty,
+                            "Mobile number should not be empty");
+                    else if (MobileNo.Length < 10)
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.MobileNumberAtleastTenDigit,
+                            "Mobile number should contain atleast ten digits");
+                    else if (MobileNo.Contains(' '))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.MobileNumberContainsChar,
+                            "Mobile number should not contain characters");
+                }
+                else return "Mobile Number is valid";
             }
-            else
+            catch (UserValidationCustomException exception)
             {
-                Console.WriteLine("entry is invalid");
+                throw exception;
             }
+            return "Mobile number is Invalid";
         }
-        public void password(string pass)
+
+        public string ValidPasswordMinEightChar(string pass)
         {
+            Regex regex = new Regex(Password);
+            var result = regex.Match(pass);
+            try
+            {
+                if (!result.Success)
+                {
+                    if (pass.Equals(string.Empty))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.PasswordEmpty,
+                            "Password should not be empty");
+                    else if (pass.Length < 8)
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.PasswordMinEightChar,
+                            "Password should contain atleast eight characters");
+                }
+                else return "Password is valid";
+            }
 
-            if (Password.IsMatch(pass))
+            catch (UserValidationCustomException exception)
             {
-                Console.WriteLine(" entry is valid");
+                throw exception;
             }
-            else
-            {
-                Console.WriteLine("entry is invalid");
-            }
+            return "Password is Invalid";
         }
-        public void password_Uppercase(string pass_1)
+        public string ValidPasswordAtLeastOneUpperCase(string pass_1)
         {
-
-            if (Password.IsMatch(pass_1))
+            Regex regex = new Regex(Password_Uppercase);
+            var result = regex.Match(pass_1);
+            try
             {
-                Console.WriteLine(" entry is valid");
+                if (!result.Success)
+                {
+                    if (!char.IsUpper(pass_1[1]))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.PasswordAtLeastOneUpperCase,
+                            "Password should contain atleast one upper case character");
+                }
+                else return "Password is valid";
             }
-            else
+        
+            catch (UserValidationCustomException exception)
             {
-                Console.WriteLine("entry is invalid");
+                throw exception;
             }
+            return "Password is Invalid";
         }
-        public void password_OneNum(string pass_2)
+
+        public string ValidPasswordAtLeastOneNumber(string pass_2)
         {
+            Regex regex = new Regex(Password_OneNum);
+            var result = regex.Match(pass_2);
+            try
+            {
+                if (!result.Success)
+                {
+                    if (!char.IsUpper(pass_2[1]))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.PasswordAtLeastOneNumber,
+                            "Password should contain atleast one Digit");
+                }
+                else return "Password is valid";
+            }
 
-            if (Password_OneNum.IsMatch(pass_2))
+            catch (UserValidationCustomException exception)
             {
-                Console.WriteLine(" entry is valid");
+                throw exception;
             }
-            else
-            {
-                Console.WriteLine("entry is invalid");
-            }
+            return "Password is Invalid";
         }
-           public void password_Special_Char(string pass_3)
-           {
 
-            if (Password_Special_Char.IsMatch(pass_3))
-            {
-                Console.WriteLine(" entry is valid");
-            }
-            else
-            {
-                Console.WriteLine("entry is invalid");
-            }
-        }
-        public void sample_Email(string s_email)
+        public string ValidPasswordOneSpecialChar(string pass_3)
         {
+            Regex regex = new Regex(Password_Special_Char);
+            var result = regex.Match(pass_3);
+            try
+            {
+                if (!result.Success)
+                { 
+                    if (!char.IsUpper(pass_3[1]))
+                        throw new UserValidationCustomException(UserValidationCustomException.ExceptionType.PasswordOneSpecialChar,
+                            "Password should contain atleast one special character");
+                }
+                else return "Password is valid";
+            }
+            catch (UserValidationCustomException exception)
+            {
+                throw exception;
+            }
+            return "Password is Invalid";
 
-            if (SampleEmail.IsMatch(s_email))
-            {
-                Console.WriteLine(" entry is valid");
-            }
-            else
-            {
-                Console.WriteLine("entry is invalid");
-            }
         }
 
     }
