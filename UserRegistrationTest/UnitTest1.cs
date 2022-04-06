@@ -3,17 +3,17 @@ using UserRegistration;
 
 namespace UserRegistrationTest
 {
-   
+
     public class Tests
     {
         Validation validation;
         [SetUp]
         public void Setup()
         {
-          validation = new Validation();
+            validation = new Validation();
         }
 
-        
+
         [Test]
 
         public void ValidFirstName()
@@ -31,8 +31,9 @@ namespace UserRegistrationTest
             }
         }
         
+
         [Test]
-      
+
         public void ValidLastName()
         {
             string lastName = "Kinekar";
@@ -46,10 +47,11 @@ namespace UserRegistrationTest
                 Assert.AreEqual("LastName is not valid", exception.Message);
             }
         }
-      
+
+
 
         [Test]
-       
+
         public void ValidEmailId()
         {
             string email = "Pk.kinekar122@gmail.com";
@@ -63,10 +65,10 @@ namespace UserRegistrationTest
                 Assert.AreEqual("EmailID is not valid", exception.Message);
             }
         }
-        
+
 
         [Test]
-      
+
 
         public void ValidMobileNumber()
         {
@@ -83,7 +85,7 @@ namespace UserRegistrationTest
         }
 
         [Test]
-        
+
         public void ValidPasswordMinEightChar()
         {
             string pass = "Kinekarpallavi";
@@ -97,10 +99,10 @@ namespace UserRegistrationTest
                 Assert.AreEqual("Password is not valid", exception.Message);
             }
         }
-      
+
 
         [Test]
-         
+
         public void ValidPasswordAtLeastOneUpperCase()
         {
             string pass_1 = "Pallavisk";
@@ -114,7 +116,7 @@ namespace UserRegistrationTest
                 Assert.AreEqual("Password is not valid", exception.Message);
             }
         }
-       
+
 
         [Test]
 
@@ -131,10 +133,10 @@ namespace UserRegistrationTest
                 Assert.AreEqual("Password is not valid", exception.Message);
             }
         }
-       
+
 
         [Test]
-       
+
         public void ValidPasswordOneSpecialChar()
         {
             string pass_3 = "Palla@763";
