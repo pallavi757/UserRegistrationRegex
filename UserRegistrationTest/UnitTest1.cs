@@ -13,15 +13,13 @@ namespace UserRegistrationTest
           validation = new Validation();
         }
 
-        /// <summary>
-        /// TC-1 First Name test
-        /// </summary>
-        /// <param name="firstName"></param>
-        [TestCase("Pallavi")]
-        [TestCase("Pal")]
+        
+        [Test]
 
-        public void FirstName_Expecting_ThrowCustomException(string firstName)
+        public void ValidFirstName()
         {
+            string firstName = "Pallavi";
+            string result = null;
             try
             {
                 string actual = validation.ValidFirstName(firstName);
@@ -32,16 +30,13 @@ namespace UserRegistrationTest
                 Assert.AreEqual("FirstName is not valid", exception.Message);
             }
         }
-        /// <summary>
-        /// TC-2 Last Name Test
-        /// </summary>
-        /// <param name="lastName"></param>
-
-        [TestCase("Kinekar")]
-        [TestCase("Kin")]
-
-        public void LastName_Expecting_ThrowCustomException(string lastName)
+        
+        [Test]
+      
+        public void ValidLastName()
         {
+            string lastName = "Kinekar";
+            string result = null;
             try
             {
                 string actual = validation.ValidLastName(lastName);
@@ -51,16 +46,14 @@ namespace UserRegistrationTest
                 Assert.AreEqual("LastName is not valid", exception.Message);
             }
         }
-        /// <summary>
-        /// TC- Email id Test
-        /// </summary>
-        /// <param name="emailId"></param>
+      
 
-        [TestCase("Pk.kinekar122@gmail.com")]
-        [TestCase("pskinekar@gmail.com")]
-
-        public void EmailId_Expecting_ThroCustomExeption(string email)
+        [Test]
+       
+        public void ValidEmailId()
         {
+            string email = "Pk.kinekar122@gmail.com";
+            string result = null;
             try
             {
                 string actual = validation.ValidEmailId(email);
@@ -70,16 +63,15 @@ namespace UserRegistrationTest
                 Assert.AreEqual("EmailID is not valid", exception.Message);
             }
         }
-        /// <summary>
-        /// TC -Mobile number test
-        /// </summary>
-        /// <param name="MobileNumber"></param>
+        
 
-        [TestCase("91 7745239933")]
-        [TestCase("917747239833")]
+        [Test]
+      
 
-        public void MobileNumber_Expecting_ThroCustomExeption(string MobileNo)
+        public void ValidMobileNumber()
         {
+            string MobileNo = "91 7745239933";
+            string result = null;
             try
             {
                 string actual = validation.ValidMobileNumber(MobileNo);
@@ -90,10 +82,12 @@ namespace UserRegistrationTest
             }
         }
 
-        [TestCase("Kinekarpallavi")]
-        [TestCase("123Kinekar")]
-        public void Password_EightChar_Expecting_ThroCustomExeption(string pass)
+        [Test]
+        
+        public void ValidPasswordMinEightChar()
         {
+            string pass = "Kinekarpallavi";
+            string result = null;
             try
             {
                 string actual = validation.ValidPasswordMinEightChar(pass);
@@ -103,15 +97,14 @@ namespace UserRegistrationTest
                 Assert.AreEqual("Password is not valid", exception.Message);
             }
         }
-        /// <summary>
-        /// TC- Password use One Upper case
-        /// </summary>
-        /// <param name="PasswordOneUpperCase"></param>
+      
 
-        [TestCase("Pallavisk")]
-        [TestCase("Pskinekar")] 
-        public void Password_OneUpperCase_Expecting_ThroCustomExeption(string pass_1)
+        [Test]
+         
+        public void ValidPasswordAtLeastOneUpperCase()
         {
+            string pass_1 = "Pallavisk";
+            string result = null;
             try
             {
                 string actual = validation.ValidPasswordAtLeastOneUpperCase(pass_1);
@@ -121,16 +114,14 @@ namespace UserRegistrationTest
                 Assert.AreEqual("Password is not valid", exception.Message);
             }
         }
-        /// <summary>
-        /// TC - Passsword use one number
-        /// </summary>
-        /// <param name="PasswordUseOneNumber"></param>
+       
 
+        [Test]
 
-        [TestCase("Pallavisk2")]
-        [TestCase("Pskinekar")]
-        public void Password_OneNubmer_Expecting_ThroCustomExeption(string pass_2)
+        public void ValidPasswordAtLeastOneNumber()
         {
+            string pass_2 = "Pallu12Kinekar";
+            string result = null;
             try
             {
                 string actual = validation.ValidPasswordAtLeastOneNumber(pass_2);
@@ -140,15 +131,14 @@ namespace UserRegistrationTest
                 Assert.AreEqual("Password is not valid", exception.Message);
             }
         }
-        /// <summary>
-        /// TC- Pawword use one special char
-        /// </summary>
-        /// <param name="PasswordUseOneSpecialChar"></param>
+       
 
-        [TestCase("Palla@76")]
-        [TestCase("PallSk45")]
-        public void Password_AtleastOneSpecialChar_Expecting_ThroCustomExeption(string pass_3)
+        [Test]
+       
+        public void ValidPasswordOneSpecialChar()
         {
+            string pass_3 = "Palla@763";
+            string result = null;
             try
             {
                 string actual = validation.ValidPasswordOneSpecialChar(pass_3);
